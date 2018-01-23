@@ -1,5 +1,5 @@
 //
-//  AlbumViewController.swift
+//  AlbumsViewController.swift
 //  thumb
 //
 //  Created by Willie Johnson on 1/22/18.
@@ -7,15 +7,52 @@
 //
 
 import UIKit
+import SnapKit
 
 /// Displays all albums.
 class AlbumsViewController: UIViewController {
+  lazy var mainView = AlbumsView()
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
+  override func viewDidLoad() {
+    super.viewDidLoad()
+    setupMainView()
+  }
+
+  override func didReceiveMemoryWarning() {
+    super.didReceiveMemoryWarning()
+  }
+}
+
+// MARK: - UI setup
+extension AlbumsViewController {
+  /**
+   Get the AlbumsView ready to display data.
+   */
+  func setupMainView() {
+    view.addSubview(mainView)
+    mainView.snp.makeConstraints { (make) in
+      make.edges.equalToSuperview()
+    }
+  }
+}
+
+// MARK: - UITableViewDelegate
+extension AlbumsViewController: UITableViewDelegate {
+
+}
+
+// MARK: - UITableViewDataSource
+extension AlbumsViewController: UITableViewDataSource {
+  func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    return 10
+  }
+
+  func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+
+    if let cell = tableView.dequeueReusableCell(withIdentifier: "albumCell") {
+      return cell
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-    }
+    return UITableViewCell()
+  }
 }

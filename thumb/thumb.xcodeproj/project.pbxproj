@@ -7,18 +7,20 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3DA1520B2016A9A600A230F0 /* SnapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DA1520A2016A9A600A230F0 /* SnapKit.framework */; };
+		3DA1520F2016AA9600A230F0 /* AlbumsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DA1520E2016AA9600A230F0 /* AlbumsView.swift */; };
+		3DA152112016ABA600A230F0 /* AlbumsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DA152102016ABA600A230F0 /* AlbumsViewController.swift */; };
 		3DE7261A20169AFB00EF21BA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DE7261920169AFB00EF21BA /* AppDelegate.swift */; };
-		3DE7261C20169AFB00EF21BA /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DE7261B20169AFB00EF21BA /* ViewController.swift */; };
-		3DE7261F20169AFB00EF21BA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3DE7261D20169AFB00EF21BA /* Main.storyboard */; };
 		3DE7262120169AFB00EF21BA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3DE7262020169AFB00EF21BA /* Assets.xcassets */; };
 		3DE7262420169AFB00EF21BA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3DE7262220169AFB00EF21BA /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3DA1520A2016A9A600A230F0 /* SnapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SnapKit.framework; path = Carthage/Build/iOS/SnapKit.framework; sourceTree = "<group>"; };
+		3DA1520E2016AA9600A230F0 /* AlbumsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumsView.swift; sourceTree = "<group>"; };
+		3DA152102016ABA600A230F0 /* AlbumsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlbumsViewController.swift; sourceTree = "<group>"; };
 		3DE7261620169AFB00EF21BA /* thumb.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = thumb.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3DE7261920169AFB00EF21BA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		3DE7261B20169AFB00EF21BA /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		3DE7261E20169AFB00EF21BA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		3DE7262020169AFB00EF21BA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3DE7262320169AFB00EF21BA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		3DE7262520169AFB00EF21BA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -29,17 +31,50 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3DA1520B2016A9A600A230F0 /* SnapKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3DA152052016A62300A230F0 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		3DA152062016A62C00A230F0 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				3DA1520E2016AA9600A230F0 /* AlbumsView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		3DA152072016A7D800A230F0 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				3DA152102016ABA600A230F0 /* AlbumsViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		3DA152092016A9A500A230F0 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				3DA1520A2016A9A600A230F0 /* SnapKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		3DE7260D20169AFB00EF21BA = {
 			isa = PBXGroup;
 			children = (
 				3DE7261820169AFB00EF21BA /* thumb */,
 				3DE7261720169AFB00EF21BA /* Products */,
+				3DA152092016A9A500A230F0 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -54,9 +89,10 @@
 		3DE7261820169AFB00EF21BA /* thumb */ = {
 			isa = PBXGroup;
 			children = (
+				3DA152072016A7D800A230F0 /* Controller */,
+				3DA152062016A62C00A230F0 /* View */,
+				3DA152052016A62300A230F0 /* Model */,
 				3DE7261920169AFB00EF21BA /* AppDelegate.swift */,
-				3DE7261B20169AFB00EF21BA /* ViewController.swift */,
-				3DE7261D20169AFB00EF21BA /* Main.storyboard */,
 				3DE7262020169AFB00EF21BA /* Assets.xcassets */,
 				3DE7262220169AFB00EF21BA /* LaunchScreen.storyboard */,
 				3DE7262520169AFB00EF21BA /* Info.plist */,
@@ -74,6 +110,7 @@
 				3DE7261220169AFB00EF21BA /* Sources */,
 				3DE7261320169AFB00EF21BA /* Frameworks */,
 				3DE7261420169AFB00EF21BA /* Resources */,
+				3DA152082016A93900A230F0 /* Carthage */,
 			);
 			buildRules = (
 			);
@@ -125,18 +162,37 @@
 			files = (
 				3DE7262420169AFB00EF21BA /* LaunchScreen.storyboard in Resources */,
 				3DE7262120169AFB00EF21BA /* Assets.xcassets in Resources */,
-				3DE7261F20169AFB00EF21BA /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		3DA152082016A93900A230F0 /* Carthage */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/Carthage/Build/iOS/SnapKit.framework",
+			);
+			name = Carthage;
+			outputPaths = (
+				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/SnapKit.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/usr/local/bin/carthage copy-frameworks";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		3DE7261220169AFB00EF21BA /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3DE7261C20169AFB00EF21BA /* ViewController.swift in Sources */,
+				3DA152112016ABA600A230F0 /* AlbumsViewController.swift in Sources */,
+				3DA1520F2016AA9600A230F0 /* AlbumsView.swift in Sources */,
 				3DE7261A20169AFB00EF21BA /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -144,14 +200,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		3DE7261D20169AFB00EF21BA /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				3DE7261E20169AFB00EF21BA /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		3DE7262220169AFB00EF21BA /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -276,6 +324,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = RFQY6T2L4D;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = thumb/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.vybe.thumb;
@@ -291,6 +343,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = RFQY6T2L4D;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = thumb/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.vybe.thumb;

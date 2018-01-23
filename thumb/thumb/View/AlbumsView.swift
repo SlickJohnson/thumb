@@ -1,5 +1,5 @@
 //
-//  AlbumView.swift
+//  AlbumsView.swift
 //  thumb
 //
 //  Created by Willie Johnson on 1/22/18.
@@ -7,14 +7,19 @@
 //
 
 import UIKit
+import SnapKit
 
 /// Displays Albums in an UITableViewController.
-class AlbumView: UIView {
+class AlbumsView: UIView {
+  /// Shows all the albums.
+  lazy var tableView = UITableView()
+  /// Title for screen.
+  lazy var titleLabel = UILabel()
 
   override init(frame: CGRect) {
     super.init(frame: frame)
-    addSubviews()
-    setupSubviewConstraints()
+
+    setupUI()
   }
 
   required init?(coder aDecoder: NSCoder) {
@@ -22,17 +27,28 @@ class AlbumView: UIView {
   }
 }
 
-// MARK: - UI
-private extension AlbumView {
+// MARK: - UI Setup
+private extension AlbumsView {
   /**
-   Add all UIViews necessary for this view.
+   Construct a view that has a label and a tableview.
    */
-  func addSubviews() {
+  func setupUI() {
+    addSubview(tableView)
+    addSubview(titleLabel)
+    
+    // table
+    tableView.snp.makeConstraints { (make) in
+      make.edges.equalToSuperview()
+    }
+    tableView.register(UITableViewCell.self, forCellReuseIdentifier: "albumCell")
+    tableView.contentInset.top = 44
 
+    // title
+    titleLabel.snp.makeConstraints { (make) in
+      make.top.equalToSuperview().offset(44)
+      make.centerX.equalToSuperview()
+    }
+    titleLabel.text = "albums"
+    titleLabel.font = UIFont(name: "futura", size: 44)
   }
-
-  /**
-   Add constraints to subviews.
-   */
-  func setupSubviewConstraints() {}
 }
