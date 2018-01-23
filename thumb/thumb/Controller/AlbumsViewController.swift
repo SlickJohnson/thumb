@@ -12,10 +12,16 @@ import SnapKit
 /// Displays all albums.
 class AlbumsViewController: UIViewController {
   lazy var mainView = AlbumsView()
+  let networking = Networking()
 
   override func viewDidLoad() {
     super.viewDidLoad()
+    
     setupMainView()
+
+    if networking.shouldDownloadAlbumJson() {
+      networking.downloadAlbumsJson()
+    }
   }
 
   override func didReceiveMemoryWarning() {
@@ -38,7 +44,8 @@ extension AlbumsViewController {
 
 // MARK: - UITableViewDelegate
 extension AlbumsViewController: UITableViewDelegate {
-
+  func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+  }
 }
 
 // MARK: - UITableViewDataSource
@@ -49,7 +56,7 @@ extension AlbumsViewController: UITableViewDataSource {
 
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
-    if let cell = tableView.dequeueReusableCell(withIdentifier: "albumCell") {
+    if let cell = tableView.dequeueReusableCell(withIdentifier: "albumCell") as? AlbumTableViewCell {
       return cell
     }
 

@@ -40,8 +40,10 @@ private extension AlbumsView {
     tableView.snp.makeConstraints { (make) in
       make.edges.equalToSuperview()
     }
-    tableView.register(UITableViewCell.self, forCellReuseIdentifier: "albumCell")
+    tableView.register(AlbumTableViewCell.self, forCellReuseIdentifier: "albumCell")
     tableView.contentInset.top = 44
+    tableView.rowHeight = UITableViewAutomaticDimension
+    tableView.estimatedRowHeight = 150
 
     // title
     titleLabel.snp.makeConstraints { (make) in
