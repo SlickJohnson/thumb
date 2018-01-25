@@ -11,21 +11,60 @@ import SnapKit
 
 /// Displays all albums.
 class AlbumsViewController: UIViewController {
-  lazy var mainView = AlbumsView()
-  let networking = Networking()
+  var mainView: AlbumsView!
+  var albums: [Album]?
+  let networking = Networking.shared
 
   override func viewDidLoad() {
     super.viewDidLoad()
     
     setupMainView()
-
-    if networking.shouldDownloadAlbumJson() {
-      networking.downloadAlbumsJson()
-    }
+    getAlbums()
   }
 
   override func didReceiveMemoryWarning() {
     super.didReceiveMemoryWarning()
+  }
+}
+
+// MARK: - Helper methods
+private extension AlbumsViewController {
+  /**
+   Download any necessary data to display the albums.
+  */
+  func getAlbums() {
+    // Download json if needed.
+    networking.downloadAlbumsJson() {
+      guard let jsonData = self.networking.getDataFromAlbumsJson() else { return }
+
+      DispatchQueue.global(qos: .background).async {
+        self.albums = self.networking.decodeAlbums(from: jsonData)
+
+        DispatchQueue.main.async {
+          self.downloadAlbumImage()
+        }
+      }
+    }
+  }
+
+  /**
+   Call the reloadData method on the mainview's table.
+  */
+  func reloadTable() {
+    mainView.tableView.reloadData()
+  }
+
+  /**
+   Download the images for albums.
+  */
+  func downloadAlbumImage() {
+    guard let albums = albums else { return }
+
+    for album in albums {
+      album.downloadImages()
+    }
+    
+    reloadTable()
   }
 }
 
@@ -35,10 +74,14 @@ extension AlbumsViewController {
    Get the AlbumsView ready to display data.
    */
   func setupMainView() {
+    mainView = AlbumsView(frame: .zero)
     view.addSubview(mainView)
     mainView.snp.makeConstraints { (make) in
       make.edges.equalToSuperview()
     }
+
+    mainView.tableView.dataSource = self
+    mainView.tableView.delegate = self
   }
 }
 
@@ -51,15 +94,21 @@ extension AlbumsViewController: UITableViewDelegate {
 // MARK: - UITableViewDataSource
 extension AlbumsViewController: UITableViewDataSource {
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    return 10
+    guard let albums = albums else { return 0 }
+    return albums.count
   }
 
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    guard let albums = albums else { return UITableViewCell() }
 
     if let cell = tableView.dequeueReusableCell(withIdentifier: "albumCell") as? AlbumTableViewCell {
+      let album = albums[indexPath.row]
+
+      cell.album = album
+
       return cell
     }
 
-    return UITableViewCell()
+    return AlbumTableViewCell()
   }
 }

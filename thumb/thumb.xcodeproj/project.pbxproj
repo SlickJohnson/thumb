@@ -8,8 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		3D5C9D952017BA1200BB1539 /* Networking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D5C9D942017BA1200BB1539 /* Networking.swift */; };
+		3D70FDA52019114800250A89 /* Zip.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D70FDA42019114800250A89 /* Zip.framework */; };
 		3D764F292017B3440016D11C /* AlbumTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D764F282017B3440016D11C /* AlbumTableViewCell.swift */; };
 		3D764F2B2017B6BC0016D11C /* Album.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D764F2A2017B6BC0016D11C /* Album.swift */; };
+		3D906BD32019435F0090FA91 /* Extensions+Networking+Album.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D906BD22019435F0090FA91 /* Extensions+Networking+Album.swift */; };
 		3DA1520B2016A9A600A230F0 /* SnapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DA1520A2016A9A600A230F0 /* SnapKit.framework */; };
 		3DA1520F2016AA9600A230F0 /* AlbumsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DA1520E2016AA9600A230F0 /* AlbumsView.swift */; };
 		3DA152112016ABA600A230F0 /* AlbumsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DA152102016ABA600A230F0 /* AlbumsViewController.swift */; };
@@ -20,8 +22,10 @@
 
 /* Begin PBXFileReference section */
 		3D5C9D942017BA1200BB1539 /* Networking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Networking.swift; sourceTree = "<group>"; };
+		3D70FDA42019114800250A89 /* Zip.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Zip.framework; path = Carthage/Build/iOS/Zip.framework; sourceTree = "<group>"; };
 		3D764F282017B3440016D11C /* AlbumTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumTableViewCell.swift; sourceTree = "<group>"; };
 		3D764F2A2017B6BC0016D11C /* Album.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Album.swift; sourceTree = "<group>"; };
+		3D906BD22019435F0090FA91 /* Extensions+Networking+Album.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extensions+Networking+Album.swift"; sourceTree = "<group>"; };
 		3DA1520A2016A9A600A230F0 /* SnapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SnapKit.framework; path = Carthage/Build/iOS/SnapKit.framework; sourceTree = "<group>"; };
 		3DA1520E2016AA9600A230F0 /* AlbumsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumsView.swift; sourceTree = "<group>"; };
 		3DA152102016ABA600A230F0 /* AlbumsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlbumsViewController.swift; sourceTree = "<group>"; };
@@ -38,6 +42,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3DA1520B2016A9A600A230F0 /* SnapKit.framework in Frameworks */,
+				3D70FDA52019114800250A89 /* Zip.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -50,6 +55,14 @@
 				3D5C9D942017BA1200BB1539 /* Networking.swift */,
 			);
 			path = Store;
+			sourceTree = "<group>";
+		};
+		3D906BD12019431C0090FA91 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				3D906BD22019435F0090FA91 /* Extensions+Networking+Album.swift */,
+			);
+			path = Extension;
 			sourceTree = "<group>";
 		};
 		3DA152052016A62300A230F0 /* Model */ = {
@@ -80,6 +93,7 @@
 		3DA152092016A9A500A230F0 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				3D70FDA42019114800250A89 /* Zip.framework */,
 				3DA1520A2016A9A600A230F0 /* SnapKit.framework */,
 			);
 			name = Frameworks;
@@ -105,6 +119,7 @@
 		3DE7261820169AFB00EF21BA /* thumb */ = {
 			isa = PBXGroup;
 			children = (
+				3D906BD12019431C0090FA91 /* Extension */,
 				3D5C9D932017B9F500BB1539 /* Store */,
 				3DA152072016A7D800A230F0 /* Controller */,
 				3DA152062016A62C00A230F0 /* View */,
@@ -192,10 +207,12 @@
 			);
 			inputPaths = (
 				"$(SRCROOT)/Carthage/Build/iOS/SnapKit.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/Zip.framework",
 			);
 			name = Carthage;
 			outputPaths = (
 				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/SnapKit.framework",
+				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/Zip.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -209,6 +226,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3D764F2B2017B6BC0016D11C /* Album.swift in Sources */,
+				3D906BD32019435F0090FA91 /* Extensions+Networking+Album.swift in Sources */,
 				3DA152112016ABA600A230F0 /* AlbumsViewController.swift in Sources */,
 				3DA1520F2016AA9600A230F0 /* AlbumsView.swift in Sources */,
 				3D5C9D952017BA1200BB1539 /* Networking.swift in Sources */,

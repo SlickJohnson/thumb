@@ -9,21 +9,21 @@
 import UIKit
 import SnapKit
 
-/// Displays Albums in an UITableViewController.
+/// Shows a list of Albums in an UITableViewController.
 class AlbumsView: UIView {
-  /// Shows all the albums.
-  lazy var tableView = UITableView()
-  /// Title for screen.
-  lazy var titleLabel = UILabel()
+  /// Album list tableview
+  var tableView: UITableView!
+  /// AlbumsView title label.
+  var titleLabel: UILabel!
 
   override init(frame: CGRect) {
     super.init(frame: frame)
-
     setupUI()
   }
 
   required init?(coder aDecoder: NSCoder) {
     super.init(coder: aDecoder)
+    setupUI()
   }
 }
 
@@ -33,24 +33,38 @@ private extension AlbumsView {
    Construct a view that has a label and a tableview.
    */
   func setupUI() {
+    // MARK: Table
+
+    tableView = UITableView(frame: .zero)
     addSubview(tableView)
-    addSubview(titleLabel)
-    
-    // table
+
+    // constraints
     tableView.snp.makeConstraints { (make) in
       make.edges.equalToSuperview()
     }
+    // cells
     tableView.register(AlbumTableViewCell.self, forCellReuseIdentifier: "albumCell")
-    tableView.contentInset.top = 44
-    tableView.rowHeight = UITableViewAutomaticDimension
-    tableView.estimatedRowHeight = 150
+    tableView.rowHeight = 220
+    // appearance
+    tableView.backgroundColor = .black
+    tableView.contentInset.top = 66
+    tableView.separatorStyle = .none
 
-    // title
+    // MARK: Title
+
+    titleLabel = UILabel(frame: .zero)
+    addSubview(titleLabel)
+    // constraints
     titleLabel.snp.makeConstraints { (make) in
-      make.top.equalToSuperview().offset(44)
+      make.top.left.right.equalToSuperview()
       make.centerX.equalToSuperview()
+      make.height.equalTo(88)
     }
+    // appearance
     titleLabel.text = "albums"
+    titleLabel.textAlignment = .center
     titleLabel.font = UIFont(name: "futura", size: 44)
+    titleLabel.textColor = .white
+    titleLabel.backgroundColor = UIColor(red: 0.1, green: 0.1, blue: 0.1, alpha: 0.90)
   }
 }
