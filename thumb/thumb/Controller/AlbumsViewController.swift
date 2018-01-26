@@ -9,10 +9,13 @@
 import UIKit
 import SnapKit
 
-/// Displays all albums.
+/// Handles displaying albums in a AlbumsView.
 class AlbumsViewController: UIViewController {
+  /// Displays albums in a UITableView.
   var mainView: AlbumsView!
+  /// List of albums to be displayed.
   var albums: [Album]?
+  /// The shared instance of networking.
   let networking = Networking.shared
 
   override func viewDidLoad() {
@@ -88,6 +91,11 @@ extension AlbumsViewController {
 // MARK: - UITableViewDelegate
 extension AlbumsViewController: UITableViewDelegate {
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    guard let albums = albums else { return }
+    let picturesViewController = PicturesViewController()
+    picturesViewController.album = albums[indexPath.row]
+
+    present(picturesViewController, animated: true, completion: nil)
   }
 }
 

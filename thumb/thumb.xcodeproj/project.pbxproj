@@ -11,10 +11,13 @@
 		3D70FDA52019114800250A89 /* Zip.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D70FDA42019114800250A89 /* Zip.framework */; };
 		3D764F292017B3440016D11C /* AlbumTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D764F282017B3440016D11C /* AlbumTableViewCell.swift */; };
 		3D764F2B2017B6BC0016D11C /* Album.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D764F2A2017B6BC0016D11C /* Album.swift */; };
+		3D787114201B9F1800A9AF8E /* PicturesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D787113201B9F1800A9AF8E /* PicturesView.swift */; };
+		3D787116201BA12700A9AF8E /* PicturesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D787115201BA12700A9AF8E /* PicturesViewController.swift */; };
 		3D906BD32019435F0090FA91 /* Extensions+Networking+Album.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D906BD22019435F0090FA91 /* Extensions+Networking+Album.swift */; };
 		3DA1520B2016A9A600A230F0 /* SnapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DA1520A2016A9A600A230F0 /* SnapKit.framework */; };
 		3DA1520F2016AA9600A230F0 /* AlbumsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DA1520E2016AA9600A230F0 /* AlbumsView.swift */; };
 		3DA152112016ABA600A230F0 /* AlbumsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DA152102016ABA600A230F0 /* AlbumsViewController.swift */; };
+		3DBFCB78201BAA0A00361837 /* PictureCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DBFCB77201BAA0A00361837 /* PictureCollectionViewCell.swift */; };
 		3DE7261A20169AFB00EF21BA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DE7261920169AFB00EF21BA /* AppDelegate.swift */; };
 		3DE7262120169AFB00EF21BA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3DE7262020169AFB00EF21BA /* Assets.xcassets */; };
 		3DE7262420169AFB00EF21BA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3DE7262220169AFB00EF21BA /* LaunchScreen.storyboard */; };
@@ -25,10 +28,13 @@
 		3D70FDA42019114800250A89 /* Zip.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Zip.framework; path = Carthage/Build/iOS/Zip.framework; sourceTree = "<group>"; };
 		3D764F282017B3440016D11C /* AlbumTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumTableViewCell.swift; sourceTree = "<group>"; };
 		3D764F2A2017B6BC0016D11C /* Album.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Album.swift; sourceTree = "<group>"; };
+		3D787113201B9F1800A9AF8E /* PicturesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PicturesView.swift; sourceTree = "<group>"; };
+		3D787115201BA12700A9AF8E /* PicturesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PicturesViewController.swift; sourceTree = "<group>"; };
 		3D906BD22019435F0090FA91 /* Extensions+Networking+Album.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extensions+Networking+Album.swift"; sourceTree = "<group>"; };
 		3DA1520A2016A9A600A230F0 /* SnapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SnapKit.framework; path = Carthage/Build/iOS/SnapKit.framework; sourceTree = "<group>"; };
 		3DA1520E2016AA9600A230F0 /* AlbumsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumsView.swift; sourceTree = "<group>"; };
 		3DA152102016ABA600A230F0 /* AlbumsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlbumsViewController.swift; sourceTree = "<group>"; };
+		3DBFCB77201BAA0A00361837 /* PictureCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PictureCollectionViewCell.swift; sourceTree = "<group>"; };
 		3DE7261620169AFB00EF21BA /* thumb.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = thumb.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3DE7261920169AFB00EF21BA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3DE7262020169AFB00EF21BA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -78,6 +84,8 @@
 			children = (
 				3DA1520E2016AA9600A230F0 /* AlbumsView.swift */,
 				3D764F282017B3440016D11C /* AlbumTableViewCell.swift */,
+				3D787113201B9F1800A9AF8E /* PicturesView.swift */,
+				3DBFCB77201BAA0A00361837 /* PictureCollectionViewCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -86,6 +94,7 @@
 			isa = PBXGroup;
 			children = (
 				3DA152102016ABA600A230F0 /* AlbumsViewController.swift */,
+				3D787115201BA12700A9AF8E /* PicturesViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -227,11 +236,14 @@
 			files = (
 				3D764F2B2017B6BC0016D11C /* Album.swift in Sources */,
 				3D906BD32019435F0090FA91 /* Extensions+Networking+Album.swift in Sources */,
+				3D787116201BA12700A9AF8E /* PicturesViewController.swift in Sources */,
 				3DA152112016ABA600A230F0 /* AlbumsViewController.swift in Sources */,
 				3DA1520F2016AA9600A230F0 /* AlbumsView.swift in Sources */,
 				3D5C9D952017BA1200BB1539 /* Networking.swift in Sources */,
 				3DE7261A20169AFB00EF21BA /* AppDelegate.swift in Sources */,
+				3DBFCB78201BAA0A00361837 /* PictureCollectionViewCell.swift in Sources */,
 				3D764F292017B3440016D11C /* AlbumTableViewCell.swift in Sources */,
+				3D787114201B9F1800A9AF8E /* PicturesView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
