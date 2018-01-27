@@ -109,7 +109,7 @@ extension AlbumTableViewCell {
   func updatePreviewImageData() {
     guard let album = album else { return }
     
-    guard let path = album.getPathToPreviewImageFile() else {
+    guard let path = getPathToPreviewImage(for: album.collection_name) else {
       print("Can't get preview image file path for album:\n \(album) \n\n")
       return
     }

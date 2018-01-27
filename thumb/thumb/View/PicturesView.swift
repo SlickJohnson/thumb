@@ -32,11 +32,18 @@ private extension PicturesView {
    Create a UIView with a colleciton view as the subview
   */
   func setupUI() {
-    
+    setupImagesCollectionView()
+    setupTitleLabel()
+  }
+
+  /**
+   Configure the collection view to display PictureCollectionViewCells.
+  */
+  func setupImagesCollectionView() {
     // Configure how the colleciton view will display its items.
     let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
-    layout.sectionInset = UIEdgeInsets(top: 20, left: 10, bottom: 10, right: 10)
-    layout.itemSize = CGSize(width: 90, height: 120)
+    layout.sectionInset = UIEdgeInsets(top: 20, left: 20, bottom: 10, right: 20)
+    layout.itemSize = CGSize(width: 160, height: 140)
 
     imagesCollectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
     addSubview(imagesCollectionView)
@@ -44,10 +51,16 @@ private extension PicturesView {
     imagesCollectionView.snp.makeConstraints { (make) in
       make.edges.equalToSuperview()
     }
-    imagesCollectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "cell")
+    imagesCollectionView.contentInset.top = 66
 
+    imagesCollectionView.register(PictureCollectionViewCell.self, forCellWithReuseIdentifier: "pictureCell")
+  }
+
+  /**
+   Configure the view title label.
+  */
+  func setupTitleLabel() {
     // MARK: Title
-
     titleLabel = UILabel(frame: .zero)
     addSubview(titleLabel)
     // constraints

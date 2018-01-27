@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import Zip
 
 final class Networking {
   /// Shared instance of Networking.
@@ -34,7 +33,7 @@ extension Networking {
       guard let tempLocalUrl = tempLocalUrl else { return }
 
       if let destination = destination {
-        self.copyFile(tempLocalUrl, to: destination)
+        copyFile(tempLocalUrl, to: destination)
       }
 
       completion()
@@ -58,6 +57,7 @@ extension Networking {
       completion()
     }
   }
+
   /**
    Get's the decodable ablum data from the albums.json file.
    */
@@ -74,7 +74,7 @@ extension Networking {
   }
 
   /**
-   Downloads the zip files for the albums.
+   Decodes the downloaded JSON file into a list of Albums.
    */
   func decodeAlbums(from data: Data) -> [Album]? {
     do {
@@ -89,42 +89,5 @@ extension Networking {
    */
   func shouldDownloadAlbumJson() -> Bool {
     return !UserDefaults.standard.bool(forKey: "hasDownloadedJson")
-  }
-}
-
-// MARK: - File management
-extension Networking {
-  /**
-   Copy the file from the specified directory to the given destination.
-
-   - Parameters:
-   - at: File to copy.
-   - destination: The path to the directory the file should be copied to.
-   */
-  func copyFile(_ at: URL, to destination: URL) {
-    do {
-      try FileManager.default.copyItem(at: at, to: destination)
-    } catch (let writeError) {
-      print("error writing file \(destination) : \(writeError)")
-    }
-  }
-
-  /**
-   Unzips the file at the given file path to the caches directory.
-   */
-  func unZip(file at: URL, to destination: URL?=nil, completion: @escaping () -> Void) {
-    Zip.addCustomFileExtension("tmp")
-
-    do {
-      let cachesDirectory = FileManager.default.urls(for:.cachesDirectory, in: .userDomainMask).first!
-
-      try Zip.unzipFile(at, destination: cachesDirectory, overwrite: true, password: nil, progress: { (progress) -> () in
-        if progress >= 1.0 {
-          completion()
-        }
-      })
-    } catch {
-      print("Something went wrong")
-    }
   }
 }

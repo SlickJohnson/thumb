@@ -94,6 +94,7 @@ extension AlbumsViewController: UITableViewDelegate {
     guard let albums = albums else { return }
     let picturesViewController = PicturesViewController()
     picturesViewController.album = albums[indexPath.row]
+    picturesViewController.modalPresentationStyle = .overFullScreen
 
     present(picturesViewController, animated: true, completion: nil)
   }

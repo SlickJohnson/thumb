@@ -33,7 +33,7 @@ extension Album {
     session.downloadTask(with: request) { (tempLocalUrl, response, error) in
       guard let tempLocalUrl = tempLocalUrl else { return }
 
-      networking.unZip(file: tempLocalUrl) {
+      unZip(file: tempLocalUrl) {
         defaults.set(true, forKey: "\(self.collection_name)imagesHasDownloaded")
       }
     }.resume()
