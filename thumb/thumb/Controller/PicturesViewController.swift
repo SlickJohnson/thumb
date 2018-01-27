@@ -19,12 +19,26 @@ class PicturesViewController: UIViewController {
   /// Keeps track of first tap in the view.
   var initialTouchPoint: CGPoint = CGPoint(x: 0, y: 0)
   /// Keeps track of whether the image collection view has reached the top or bottom of the view.
-  var hasReachedBottom, hasReachedTop: Bool!
+  var hasReachedTop: Bool! // hasReachedBottom,
+  var isMovingModalView = false {
+    didSet {
+      mainView.imagesCollectionView.isScrollEnabled = !isMovingModalView
+    }
+  }
+
+  init(_ album: Album) {
+    self.album = album
+    super.init(nibName: nil, bundle: nil)
+  }
+
+  required init?(coder aDecoder: NSCoder) {
+    super.init(coder: aDecoder)
+  }
 
   override func viewDidLoad() {
     super.viewDidLoad()
     hasReachedTop = false
-    hasReachedBottom = false
+//    hasReachedBottom = false
     setupUI()
     getAlbumImages()
   }
@@ -47,6 +61,8 @@ private extension PicturesViewController {
     mainView.snp.makeConstraints { (make) in
       make.edges.equalToSuperview()
     }
+    mainView.titleLabel.text = album.collection_name.lowercased()
+
     mainView.imagesCollectionView.delegate = self
     mainView.imagesCollectionView.dataSource = self
     let panGesture = UIPanGestureRecognizer(target: self, action: #selector(panGestureRecognizerHandler(_:)))
@@ -69,8 +85,6 @@ private extension PicturesViewController {
         print("Couldn't decode an image")
       }
     }
-
-    print(images)
     reloadData()
   }
 }
@@ -87,26 +101,45 @@ extension PicturesViewController {
     switch recognizer.state {
     case .began:
       initialTouchPoint = touchPoint
-
     case .changed:
-      if hasReachedTop && (touchPoint.y - initialTouchPoint.y > 0)
-        || hasReachedBottom && (touchPoint.y - initialTouchPoint.y < 0) {
-        let translation = recognizer.translation(in: view.superview)
+      guard hasReachedTop else {
+        initialTouchPoint = touchPoint
+        return
+      }
+
+      if hasReachedTop {
+        if !isMovingModalView {
+          UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseOut, animations: {
+            self.mainView.titleLabel.alpha = 0
+          }, completion: nil)
+        }
+        guard let superview = view.superview else { return }
+        let translation = recognizer.translation(in: superview)
 
         view.center = CGPoint(x: view.center.x + translation.x,
                                 y: view.center.y + translation.y)
 
-        recognizer.setTranslation(CGPoint.zero, in: view.superview)
-      }
+        recognizer.setTranslation(CGPoint.zero, in: superview)
+        // Ranges from 0 - 160.
+        let delta = min(max(abs(view.center.y - superview.center.y) / 2, 0), 160)
 
+        mainView.layer.cornerRadius = delta
+        mainView.frame.size = CGSize(width: superview.frame.size.width - delta / 4, height: superview.frame.size.height - delta * 2)
+        isMovingModalView = true
+      }
     case .ended, .cancelled:
-      if hasReachedTop && (touchPoint.y - initialTouchPoint.y > 200)
-        || hasReachedBottom && (touchPoint.y - initialTouchPoint.y < 200) {
+      if hasReachedTop && (touchPoint.y - initialTouchPoint.y > 200) {
         dismiss(animated: true, completion: nil)
       } else {
+        guard isMovingModalView else { return }
         UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseOut, animations: {
           self.view.frame = CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: self.view.frame.size.height)
-        }, completion: nil)
+          self.mainView.layer.cornerRadius = 0
+          self.mainView.frame.size = self.view.frame.size
+          self.mainView.titleLabel.alpha = 1
+        }, completion: { _ in
+          self.isMovingModalView = false
+        })
       }
     default:
       return
@@ -116,9 +149,19 @@ extension PicturesViewController {
 
 // MARK: - UICollectionViewDelegate
 extension PicturesViewController: UICollectionViewDelegate {
-  func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
-    hasReachedBottom = scrollView.contentOffset.y >= (scrollView.contentSize.height - scrollView.frame.size.height)
-    hasReachedTop = scrollView.contentOffset.y < 0
+  func scrollViewDidScroll(_ scrollView: UIScrollView) {
+    let offset = scrollView.contentOffset.y
+    let topLimit: CGFloat = -120.0
+
+    if !isMovingModalView {
+      hasReachedTop = offset < topLimit
+
+      if scrollView.contentOffset.y < 0 {
+        self.mainView.titleLabel.alpha = abs(scrollView.contentOffset.y / 100)
+      } else if scrollView.contentOffset.y > 0 {
+        self.mainView.titleLabel.alpha = 0
+      }
+    }
   }
 }
 
