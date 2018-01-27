@@ -14,9 +14,10 @@ class PicturesViewController: UIViewController {
   var mainView: PicturesView!
   /// The album who's images will be shown.
   var album: Album!
+  /// Loaded images of the album.
+  var images: [UIImage]?
   /// Keeps track of first tap in the view.
   var initialTouchPoint: CGPoint = CGPoint(x: 0, y: 0)
-  var distance: CGFloat = 0.0
   /// Keeps track of whether the image collection view has reached the top or bottom of the view.
   var hasReachedBottom, hasReachedTop: Bool!
 
@@ -25,6 +26,7 @@ class PicturesViewController: UIViewController {
     hasReachedTop = false
     hasReachedBottom = false
     setupUI()
+    getAlbumImages()
   }
 
   override func didReceiveMemoryWarning() {
@@ -38,7 +40,7 @@ private extension PicturesViewController {
   /**
    Setup the mainView and other necessary configurations.
   */
-  private func setupUI() {
+  func setupUI() {
     mainView = PicturesView(frame: .zero)
     view.addSubview(mainView)
 
@@ -52,17 +54,40 @@ private extension PicturesViewController {
     panGesture.delegate = self
     mainView.imagesCollectionView.addGestureRecognizer(panGesture)
   }
+
+  /**
+   Loads all album images from caches directory.
+  */
+  func getAlbumImages() {
+    guard let imagesFolder = getPathToImages(for: album.collection_name) else { return }
+    guard let imagesData = loadFiles(from: imagesFolder) else { return }
+    images = [UIImage]()
+    for data in imagesData {
+      if let image = UIImage(data: data) {
+        images?.append(image)
+      } else {
+        print("Couldn't decode an image")
+      }
+    }
+
+    print(images)
+    reloadData()
+  }
 }
 
 // MARK: - Helper functions
 extension PicturesViewController {
+  func reloadData() {
+    mainView.imagesCollectionView.reloadData()
+  }
+
   @objc func panGestureRecognizerHandler(_ recognizer: UIPanGestureRecognizer) {
     let touchPoint = recognizer.location(in: view?.window)
 
     switch recognizer.state {
     case .began:
       initialTouchPoint = touchPoint
-      distance = touchPoint.y - initialTouchPoint.y
+
     case .changed:
       if hasReachedTop && (touchPoint.y - initialTouchPoint.y > 0)
         || hasReachedBottom && (touchPoint.y - initialTouchPoint.y < 0) {
@@ -100,7 +125,8 @@ extension PicturesViewController: UICollectionViewDelegate {
 // MARK: - UICollectionViewDataSource
 extension PicturesViewController: UICollectionViewDataSource {
   func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-    return 100
+    guard let images = images else { return 0 }
+    return images.count
   }
 
   func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -108,7 +134,8 @@ extension PicturesViewController: UICollectionViewDataSource {
       .dequeueReusableCell(withReuseIdentifier: "pictureCell", for: indexPath) as? PictureCollectionViewCell else {
         return UICollectionViewCell()
       }
-
+    guard let images = images else { return UICollectionViewCell() }
+    cell.pictureImageView.image = images[indexPath.row]
     return cell
   }
 }

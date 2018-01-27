@@ -63,3 +63,38 @@ func getPathToPreviewImage(for albumName: String) -> URL? {
   return pathToImagesDirectory
 }
 
+/**
+ Return the path to the album's images.
+ */
+func getPathToImages(for albumName: String) -> URL? {
+  guard let cachesDirectory = FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask).first else { return nil }
+
+  // Account for wrong folder names created by unzipping zip files.
+  var folderName = albumName.lowercased().replacingOccurrences(of: "health", with: "heath")
+  if folderName.last == "s" {
+    folderName.removeLast()
+  }
+
+  return cachesDirectory.appendingPathComponent(folderName, isDirectory: true)
+}
+
+/**
+ Load multiple files from a folder.
+ */
+func loadFiles(from folder: URL) -> [Data]? {
+  var folderData = [Data]()
+
+  do {
+    var files = try FileManager.default.contentsOfDirectory(at: folder, includingPropertiesForKeys: nil, options: [.skipsHiddenFiles])
+    files = files.filter { !$0.absoluteString.contains("_preview") }
+    for file in files {
+      let data = try Data(contentsOf: file)
+      folderData.append(data)
+    }
+  } catch {
+    print("failed to get data for folder")
+    return nil
+  }
+  return folderData
+}
+

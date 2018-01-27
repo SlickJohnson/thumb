@@ -31,7 +31,7 @@ extension PictureCollectionViewCell {
    Configures the Cell to have an UIImageView that fills the cell.
   */
   func setupUI() {
-    pictureImageView = UIImageView(image: #imageLiteral(resourceName: "placeholder"), highlightedImage: #imageLiteral(resourceName: "placeholder"))
+    pictureImageView = UIImageView(frame: .zero)
     addSubview(pictureImageView)
 
     pictureImageView.snp.makeConstraints { (make) in
@@ -39,5 +39,6 @@ extension PictureCollectionViewCell {
     }
     pictureImageView.clipsToBounds = true
     pictureImageView.contentMode = .scaleAspectFill
+    pictureImageView.layer.cornerRadius = 5
   }
 }

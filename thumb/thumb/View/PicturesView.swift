@@ -42,8 +42,8 @@ private extension PicturesView {
   func setupImagesCollectionView() {
     // Configure how the colleciton view will display its items.
     let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
-    layout.sectionInset = UIEdgeInsets(top: 20, left: 20, bottom: 10, right: 20)
-    layout.itemSize = CGSize(width: 160, height: 140)
+    layout.sectionInset = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 20)
+    layout.itemSize = CGSize(width: 160, height: 160)
 
     imagesCollectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
     addSubview(imagesCollectionView)
