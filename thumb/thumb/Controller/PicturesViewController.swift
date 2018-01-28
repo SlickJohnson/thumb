@@ -38,14 +38,12 @@ class PicturesViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     hasReachedTop = false
-//    hasReachedBottom = false
     setupUI()
     getAlbumImages()
   }
 
   override func didReceiveMemoryWarning() {
     super.didReceiveMemoryWarning()
-    setupUI()
   }
 }
 
@@ -156,9 +154,9 @@ extension PicturesViewController: UICollectionViewDelegate {
     if !isMovingModalView {
       hasReachedTop = offset < topLimit
 
-      if scrollView.contentOffset.y < 0 {
-        self.mainView.titleLabel.alpha = abs(scrollView.contentOffset.y / 100)
-      } else if scrollView.contentOffset.y > 0 {
+      if offset < 0 {
+        self.mainView.titleLabel.alpha = abs(offset / 100)
+      } else {
         self.mainView.titleLabel.alpha = 0
       }
     }

@@ -94,8 +94,16 @@ extension AlbumsViewController: UITableViewDelegate {
     guard let albums = albums else { return }
     let picturesViewController = PicturesViewController(albums[indexPath.row])
     picturesViewController.modalPresentationStyle = .overFullScreen
-
     present(picturesViewController, animated: true, completion: nil)
+  }
+
+  func scrollViewDidScroll(_ scrollView: UIScrollView) {
+    let offset = scrollView.contentOffset.y
+    if offset < 0 {
+      self.mainView.titleLabel.alpha = abs(offset / 100)
+    } else {
+      self.mainView.titleLabel.alpha = 0
+    }
   }
 }
 
