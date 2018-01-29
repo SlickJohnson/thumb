@@ -25,6 +25,7 @@ class PicturesViewController: UIViewController {
       mainView.imagesCollectionView.isScrollEnabled = !isMovingModalView
     }
   }
+  let lightImpactFeedbackGenerator = UIImpactFeedbackGenerator(style: .medium)
 
   init(_ album: Album) {
     self.album = album
@@ -99,6 +100,8 @@ extension PicturesViewController {
     switch recognizer.state {
     case .began:
       initialTouchPoint = touchPoint
+      // Prepare shortly before playing
+      lightImpactFeedbackGenerator.prepare()
     case .changed:
       guard hasReachedTop else {
         initialTouchPoint = touchPoint
@@ -110,6 +113,9 @@ extension PicturesViewController {
           UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseOut, animations: {
             self.mainView.titleLabel.alpha = 0
           }, completion: nil)
+
+          // Play the haptic signal
+          lightImpactFeedbackGenerator.impactOccurred()
         }
         guard let superview = view.superview else { return }
         let translation = recognizer.translation(in: superview)
